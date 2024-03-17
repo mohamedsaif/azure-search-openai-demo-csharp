@@ -3,6 +3,7 @@
 global using System.Diagnostics;
 global using System.Runtime.CompilerServices;
 global using System.Text.Json;
+global using Azure;
 global using Azure.AI.FormRecognizer.DocumentAnalysis;
 global using Azure.AI.OpenAI;
 global using Azure.Identity;

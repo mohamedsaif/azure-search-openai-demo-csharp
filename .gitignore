@@ -483,3 +483,5 @@ env/
 venv/
 myvenv/
 ENV/
+access-details.txt
+app/backend/settings.txt

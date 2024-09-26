@@ -146,15 +146,18 @@ internal static class WebApplicationExtensions
         IConfiguration config,
         CancellationToken cancellationToken)
     {
-        var result = await client.GetImageGenerationsAsync(new ImageGenerationOptions
-        {
-            Prompt = prompt.Prompt,
-        },
-        cancellationToken);
+        //var deploymentId = "dall-e-3";
+        //var result = await client.GetImageGenerationsAsync(new ImageGenerationOptions
+        //{
+        //    Prompt = prompt.Prompt, DeploymentName = deploymentId
+        //},
+        //cancellationToken);
 
-        var imageUrls = result.Value.Data.Select(i => i.Url).ToList();
-        var response = new ImageResponse(result.Value.Created, imageUrls);
+        //var imageUrls = result.Value.Data.Select(i => i.Url).ToList();
+        //var response = new ImageResponse(result.Value.Created, imageUrls);
 
-        return TypedResults.Ok(response);
+        //return TypedResults.Ok(response);
+        IResult results = await Task.FromResult(Results.Ok());
+        return results;
     }
 }

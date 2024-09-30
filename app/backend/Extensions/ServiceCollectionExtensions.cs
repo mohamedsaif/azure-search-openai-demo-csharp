@@ -36,8 +36,11 @@ internal static class ServiceCollectionExtensions
             var azureSearchIndex = config["AzureSearchIndex"];
             ArgumentNullException.ThrowIfNullOrEmpty(azureSearchIndex);
 
+            var azureAISearchKey = config["AzureAISearchKey"];
+            ArgumentNullException.ThrowIfNullOrWhiteSpace(azureAISearchKey);
+
             var searchClient = new SearchClient(
-                               new Uri(azureSearchServiceEndpoint), azureSearchIndex, s_azureCredential);
+                            new Uri(azureSearchServiceEndpoint), azureSearchIndex, new AzureKeyCredential(azureAISearchKey));
 
             return new AzureSearchService(searchClient);
         });
@@ -61,7 +64,10 @@ internal static class ServiceCollectionExtensions
                 var azureOpenAiServiceEndpoint = config["AzureOpenAiServiceEndpoint"];
                 ArgumentNullException.ThrowIfNullOrEmpty(azureOpenAiServiceEndpoint);
 
-                var openAIClient = new OpenAIClient(new Uri(azureOpenAiServiceEndpoint), s_azureCredential);
+                var azureOpenAIKey = config["AzureOpenAIKey"];
+                ArgumentNullException.ThrowIfNullOrWhiteSpace(azureOpenAIKey);
+
+                var openAIClient = new OpenAIClient(new Uri(azureOpenAiServiceEndpoint), new AzureKeyCredential(azureOpenAIKey));
 
                 return openAIClient;
             }
@@ -87,7 +93,7 @@ internal static class ServiceCollectionExtensions
                 var azureComputerVisionServiceEndpoint = config["AzureComputerVisionServiceEndpoint"];
                 ArgumentNullException.ThrowIfNullOrEmpty(azureComputerVisionServiceEndpoint);
                 var httpClient = sp.GetRequiredService<IHttpClientFactory>().CreateClient();
-                
+
                 var visionService = new AzureComputerVisionService(httpClient, azureComputerVisionServiceEndpoint, s_azureCredential);
                 return new ReadRetrieveReadChatService(searchClient, openAIClient, config, visionService, s_azureCredential);
             }

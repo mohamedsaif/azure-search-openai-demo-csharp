@@ -14,6 +14,7 @@ COPY ["backend/", "backend/"]
 COPY ["frontend/", "frontend/"]
 COPY ["shared/", "shared/"]
 COPY ["SharedWebComponents", "SharedWebComponents/"]
+# COPY ["backend/settings/appsettings.json", "settings/"]
 RUN dotnet restore "backend/MinimalApi.csproj"
 
 WORKDIR "/src/backend"

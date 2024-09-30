@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Antiforgery;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.ConfigureAzureKeyVault();
+//builder.Configuration.ConfigureAzureKeyVault();
+builder.Configuration.AddJsonFile("settings/appsettings.json", optional: false, reloadOnChange: true);
 
 // See: https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
